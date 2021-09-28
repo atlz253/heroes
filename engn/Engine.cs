@@ -5,16 +5,11 @@ namespace engn
 {
     public class Engine
     {
-        private const string cpp = @"./engine.lib";
+        [DllImport(@"./engine", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int CSEngineInit();
 
-        [DllImport(cpp, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int CSEngineInit();
-
-        [DllImport(cpp, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int CSEngineQuit();
-
-        [DllImport(cpp, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool CSEventCheck();
+        [DllImport(@"./engine", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int CSEngineQuit();
 
         public static int Init()
         {

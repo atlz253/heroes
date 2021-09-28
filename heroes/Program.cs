@@ -9,6 +9,11 @@ namespace heroes
         {
             Engine.Init();
 
+            while (Event.Check())
+            {
+                
+            }
+
             Engine.Quit();
         }
     }
