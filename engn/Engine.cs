@@ -6,17 +6,17 @@ namespace engn
     public class Engine
     {
         [DllImport(@"./engine", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int CSEngineInit();
+        private static extern bool CSEngineInit();
 
         [DllImport(@"./engine", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int CSEngineQuit();
+        private static extern bool CSEngineQuit();
 
-        public static int Init()
+        public static bool Init()
         {
             return CSEngineInit();
         }
 
-        public static int Quit()
+        public static bool Quit()
         {
             return CSEngineQuit();
         }
