@@ -3,12 +3,12 @@ using System.Runtime.InteropServices;
 
 namespace engn
 {
-    public class Engine
+    public static class Engine
     {
-        [DllImport(@"./engine", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"./engine")]
         private static extern bool CSEngineInit();
 
-        [DllImport(@"./engine", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"./engine")]
         private static extern bool CSEngineQuit();
 
         public static bool Init()
@@ -19,6 +19,25 @@ namespace engn
         public static bool Quit()
         {
             return CSEngineQuit();
+        }
+    }
+
+    public static class Render
+    {
+        [DllImport(@"./engine")]
+        private static extern bool CSRenderClear();
+
+        [DllImport(@"./engine")]
+        private static extern void CSRenderPresent();
+
+        public static bool Clear()
+        {
+            return CSRenderClear();
+        }
+
+        public static void Present()
+        {
+            CSRenderPresent();
         }
     }
 }
