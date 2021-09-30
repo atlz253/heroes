@@ -6,38 +6,38 @@ namespace engn
     public static class Engine
     {
         [DllImport(@"./engine")]
-        private static extern bool CSEngineInit();
+        private static extern bool EngineInit();
 
         [DllImport(@"./engine")]
-        private static extern bool CSEngineQuit();
+        private static extern bool EngineQuit();
 
         public static bool Init()
         {
-            return CSEngineInit();
+            return EngineInit();
         }
 
         public static bool Quit()
         {
-            return CSEngineQuit();
+            return EngineQuit();
         }
     }
 
     public static class Render
     {
         [DllImport(@"./engine")]
-        private static extern bool CSRenderClear();
+        private static extern bool RenderClear();
 
         [DllImport(@"./engine")]
-        private static extern void CSRenderPresent();
+        private static extern void RenderPresent();
 
         public static bool Clear()
         {
-            return CSRenderClear();
+            return RenderClear();
         }
 
         public static void Present()
         {
-            CSRenderPresent();
+            RenderPresent();
         }
     }
 }
