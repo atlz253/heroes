@@ -24,7 +24,7 @@ namespace engn
             this.x = x;
             this.y = y;
         }
-    }
+    } 
 
     public struct Color
     {
@@ -39,6 +39,38 @@ namespace engn
             this.g = g;
             this.b = b;
             this.a = a;
+        }
+
+        public Color(int r, int g, int b, int a) // FIXME: values check
+        {
+            this.r = (char)r;
+            this.g = (char)g;
+            this.b = (char)b;
+            this.a = (char)a;
+        }
+
+        public Color((char, char, char, char) color)
+        {
+            this.r = color.Item1;
+            this.g = color.Item2;
+            this.b = color.Item3;
+            this.a = color.Item4;
+        }
+
+        public Color((int, int, int, int) color) // FIXME: values check
+        {
+            this.r = (char)color.Item1;
+            this.g = (char)color.Item2;
+            this.b = (char)color.Item3;
+            this.a = (char)color.Item4;
+        }
+
+        public static Color White
+        {
+            get
+            {
+                return new Color((char)255, (char)255, (char)255, (char)255);
+            }
         }
     }
 }
