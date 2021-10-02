@@ -13,4 +13,32 @@ namespace engn
             this.y = y;
         }
     }
+
+    public struct Point
+    {
+        public int x;
+        public int y;
+
+        public Point(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public struct Color
+    {
+        public char r;
+        public char g;
+        public char b;
+        public char a;
+
+        public Color(char r, char g, char b, char a)
+        {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
+        }
+    }
 }
