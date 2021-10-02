@@ -8,15 +8,23 @@ namespace engn
         private readonly IntPtr _entity;
 
         [DllImport(@"./engine")] private static extern IntPtr CreateEntity();
-        [DllImport(@"./engine")] private static extern ushort GetWidth(IntPtr entity);
-        [DllImport(@"./engine")] private static extern ushort GetHeight(IntPtr entity);
-        [DllImport(@"./engine")] private static extern void SetWidth(IntPtr entity, ushort w);
-        [DllImport(@"./engine")] private static extern void SetHeight(IntPtr entity, ushort w);
-        [DllImport(@"./engine")] private static extern short GetX(IntPtr entity);
-        [DllImport(@"./engine")] private static extern short GetY(IntPtr entity);
-        [DllImport(@"./engine")] private static extern short SetX(IntPtr entity, short x);
-        [DllImport(@"./engine")] private static extern short SetY(IntPtr entity, short y);
-        [DllImport(@"./engine")] private static extern short SetTexture(IntPtr entity, string path);
+        [DllImport(@"./engine")] private static extern ushort GetWidthEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern ushort GetHeightEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetWidthEntity(IntPtr entity, ushort w);
+        [DllImport(@"./engine")] private static extern void SetHeightEntity(IntPtr entity, ushort w);
+        [DllImport(@"./engine")] private static extern short GetXEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern short GetYEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetXEntity(IntPtr entity, short x);
+        [DllImport(@"./engine")] private static extern void SetYEntity(IntPtr entity, short y);
+        [DllImport(@"./engine")] private static extern ushort GetTileWEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern ushort GetTileHEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetTileWEntity(IntPtr entity, ushort w);
+        [DllImport(@"./engine")] private static extern void SetTileHEntity(IntPtr entity, ushort h);
+        [DllImport(@"./engine")] private static extern short GetTileXEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern short GetTileYEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetTileXEntity(IntPtr entity, short x);
+        [DllImport(@"./engine")] private static extern void SetTileYEntity(IntPtr entity, short y);
+        [DllImport(@"./engine")] private static extern void SetTextureEntity(IntPtr entity, string path);
         [DllImport(@"./engine")] private static extern void RenderEntity(IntPtr entity);
         [DllImport(@"./engine")] private static extern IntPtr DeleteEntity(IntPtr entity);
 
@@ -24,12 +32,12 @@ namespace engn
         {
             get
             {
-                return GetWidth(_entity);
+                return GetWidthEntity(_entity);
             }
 
             set
             {
-                SetWidth(_entity, value);
+                SetWidthEntity(_entity, value);
             }
         }
 
@@ -37,12 +45,12 @@ namespace engn
         {
             get
             {
-                return GetHeight(_entity);
+                return GetHeightEntity(_entity);
             }
 
             set
             {
-                SetHeight(_entity, value);
+                SetHeightEntity(_entity, value);
             }
         }
 
@@ -50,12 +58,12 @@ namespace engn
         {
             get
             {
-                return GetX(_entity);
+                return GetXEntity(_entity);
             }
 
             set
             {
-                SetX(_entity, value);
+                SetXEntity(_entity, value);
             }
         }
 
@@ -63,12 +71,64 @@ namespace engn
         {
             get
             {
-                return GetY(_entity);
+                return GetYEntity(_entity);
             }
 
             set
             {
-                SetY(_entity, value);
+                SetYEntity(_entity, value);
+            }
+        }
+
+        public ushort TileWidth
+        {
+            get
+            {
+                return GetTileWEntity(_entity);
+            }
+
+            set
+            {
+                SetTileWEntity(_entity, value);
+            }
+        }
+
+        public ushort TileHeight
+        {
+            get
+            {
+                return GetTileHEntity(_entity);
+            }
+
+            set
+            {
+                SetTileHEntity(_entity, value);
+            }
+        }
+
+        public short TileX
+        {
+            get
+            {
+                return GetTileXEntity(_entity);
+            }
+
+            set
+            {
+                SetTileXEntity(_entity, value);
+            }
+        }
+
+        public short TileY
+        {
+            get
+            {
+                return GetTileYEntity(_entity);
+            }
+
+            set
+            {
+                SetTileYEntity(_entity, value);
             }
         }
 
@@ -76,7 +136,7 @@ namespace engn
         {
             set
             {
-                SetTexture(_entity, value);
+                SetTextureEntity(_entity, value);
             }
         }
 
@@ -91,9 +151,32 @@ namespace engn
             SetPosition(geometry.x, geometry.y);
         }
 
-        public Entity(string texturePath, Rect geometry) : this(geometry)
+        public Entity((ushort, ushort, short, short) geometry) : this()
+        {
+            SetSize(geometry.Item1, geometry.Item2);
+            SetPosition(geometry.Item3, geometry.Item4);
+        }
+
+        public Entity(Rect geometry, string texturePath) : this(geometry)
         {
             Texture = texturePath;
+        }
+
+        public Entity((ushort, ushort, short, short) geometry, string texturePath) : this(geometry)
+        {
+            Texture = texturePath;
+        }
+
+        public Entity(Rect geometry, string texturePath, Rect tile) : this(geometry, texturePath)
+        {
+            SetTileSize(tile.w, tile.h);
+            SetTilePosition(tile.x, tile.y);
+        }
+
+        public Entity((ushort, ushort, short, short) geometry, string texturePath, (ushort, ushort, short, short) tile) : this(geometry, texturePath)
+        {
+            SetTileSize(tile.Item1, tile.Item2);
+            SetTilePosition(tile.Item3, tile.Item4);
         }
 
         public void SetSize(ushort w, ushort h)
@@ -106,6 +189,18 @@ namespace engn
         {
             X = x;
             Y = y;
+        }
+
+        public void SetTileSize(ushort w, ushort h)
+        {
+            TileWidth = w;
+            TileHeight = h;
+        }
+
+        public void SetTilePosition(short x, short y)
+        {
+            TileX = x;
+            TileY = y;
         }
 
         public void Render()
