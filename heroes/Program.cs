@@ -15,8 +15,8 @@ namespace heroes
         {
             for (int i = 1; i < screenSize / cellSize; i++)
             {
-                vertical.Add(new Line((cellSize * i, 0), (cellSize * i, screenSize), (255, 255, 255, 127)));
-                horizontal.Add(new Line((0, cellSize * i), (screenSize, cellSize * i), (255, 255, 255, 127)));
+                vertical.Add(new Line((cellSize * i, 0), (cellSize * i, screenSize), (255, 255, 255, 120)));
+                horizontal.Add(new Line((0, cellSize * i), (screenSize, cellSize * i), (255, 255, 255, 120)));
             }
         }
 
