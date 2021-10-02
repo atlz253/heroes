@@ -6,14 +6,14 @@ namespace engn
     public static class Engine
     {
         [DllImport(@"./engine")]
-        private static extern bool EngineInit();
+        private static extern bool EngineInit(int w, int h);
 
         [DllImport(@"./engine")]
         private static extern bool EngineQuit();
 
-        public static bool Init()
+        public static bool Init(int w = 1280, int h = 720)
         {
-            return EngineInit();
+            return EngineInit(w, h);
         }
 
         public static bool Quit()
