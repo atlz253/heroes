@@ -12,6 +12,14 @@ namespace engn
             this.x = x;
             this.y = y;
         }
+
+        public Rect((ushort, ushort, short, short) rect)
+        {
+            this.w = rect.Item1;
+            this.h = rect.Item2;
+            this.x = rect.Item3;
+            this.y = rect.Item4;
+        }
     }
 
     public struct Point
