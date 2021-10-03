@@ -4,57 +4,75 @@ using System.Collections.Generic;
 
 namespace heroes
 {
-    static class Program
+    public static class Global
     {
-        private const int screenSize = 960, cellSize = 32;
-        private static Random rnd = new Random();
-        private static List<Line> vertical = new List<Line>(), horizontal = new List<Line>();
-        private static Entity[,] background = new Entity[screenSize/cellSize, screenSize/cellSize];
+        public static Random rnd = new Random();
+        public const int screenSize = 960, cellSize = 32;
+        public const string texture = "/home/fedor/Desktop/heroes/heroes/heroes/res/textures.png";
+    }
 
-        private static void InitGrid()
+    public sealed class World
+    {
+        private static List<Line> vertical = new List<Line>(), horizontal = new List<Line>();
+        private static Entity[,] background = new Entity[Global.screenSize / Global.cellSize, Global.screenSize / Global.cellSize];
+
+        public World()
         {
-            for (int i = 1; i < screenSize / cellSize; i++)
+            InitGrid();
+            InitBackground();
+        }
+
+        private void InitGrid()
+        {
+            for (int i = 1; i < Global.screenSize / Global.cellSize; i++)
             {
-                vertical.Add(new Line((cellSize * i, 0), (cellSize * i, screenSize), (255, 255, 255, 120)));
-                horizontal.Add(new Line((0, cellSize * i), (screenSize, cellSize * i), (255, 255, 255, 120)));
+                vertical.Add(new Line((Global.cellSize * i, 0), (Global.cellSize * i, Global.screenSize), (255, 255, 255, 120)));
+                horizontal.Add(new Line((0, Global.cellSize * i), (Global.screenSize, Global.cellSize * i), (255, 255, 255, 120)));
             }
         }
 
-        private static void InitBackground()
+        private void InitBackground()
         {
-            for (int i = 0; i < screenSize / cellSize; i++)
-                for (int j = 0; j < screenSize / cellSize; j++)
-                    background[i, j] = new Entity((cellSize, cellSize, (short) (i * cellSize), (short) (j * cellSize)), "/home/fedor/Desktop/heroes/heroes/heroes/res/textures.png", (cellSize, cellSize, (short)(cellSize * rnd.Next(2)), (short)(cellSize * rnd.Next(2))));
+            for (int i = 0; i < Global.screenSize / Global.cellSize; i++)
+                for (int j = 0; j < Global.screenSize / Global.cellSize; j++)
+                    background[i, j] = new Entity((Global.cellSize, Global.cellSize, (short)(i * Global.cellSize), (short)(j * Global.cellSize)), Global.texture, (Global.cellSize, Global.cellSize, (short)(Global.cellSize * Global.rnd.Next(2)), (short)(Global.cellSize * Global.rnd.Next(2))));
         }
 
-        private static void RenderGrid()
+        public void Render()
+        {
+            RenderBackground();
+            RenderGrid();
+        }
+
+        private void RenderGrid()
         {
             foreach (Line line in vertical)
-                    line.Render();
+                line.Render();
             foreach (Line line in horizontal)
-                    line.Render();
+                line.Render();
         }
 
-        private static void RenderBackground()
+        private void RenderBackground()
         {
-            for (int i = 0; i < screenSize / cellSize; i++)
-                for (int j = 0; j < screenSize / cellSize; j++)
+            for (int i = 0; i < Global.screenSize / Global.cellSize; i++)
+                for (int j = 0; j < Global.screenSize / Global.cellSize; j++)
                     background[i, j].Render();
         }
+    }
 
+    static class Program
+    {
         static void Main(string[] args)
         {
-            Engine.Init(screenSize, screenSize);
+            Engine.Init(Global.screenSize, Global.screenSize);
 
-            InitGrid();
-            InitBackground();
+            World world = new World();
 
             while (Event.Check())
             {
                 Render.Clear();
-                
-                RenderBackground();
-                RenderGrid();
+
+                world.Render();
 
                 Render.Present();
             }
