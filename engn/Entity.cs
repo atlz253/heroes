@@ -7,27 +7,8 @@ namespace engn
     {
         private readonly IntPtr _entity;
 
-        [DllImport(@"./engine")] private static extern IntPtr CreateEntity();
         [DllImport(@"./engine")] private static extern ushort GetWidthEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern ushort GetHeightEntity(IntPtr entity);
         [DllImport(@"./engine")] private static extern void SetWidthEntity(IntPtr entity, ushort w);
-        [DllImport(@"./engine")] private static extern void SetHeightEntity(IntPtr entity, ushort w);
-        [DllImport(@"./engine")] private static extern short GetXEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern short GetYEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern void SetXEntity(IntPtr entity, short x);
-        [DllImport(@"./engine")] private static extern void SetYEntity(IntPtr entity, short y);
-        [DllImport(@"./engine")] private static extern ushort GetTileWEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern ushort GetTileHEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern void SetTileWEntity(IntPtr entity, ushort w);
-        [DllImport(@"./engine")] private static extern void SetTileHEntity(IntPtr entity, ushort h);
-        [DllImport(@"./engine")] private static extern short GetTileXEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern short GetTileYEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern void SetTileXEntity(IntPtr entity, short x);
-        [DllImport(@"./engine")] private static extern void SetTileYEntity(IntPtr entity, short y);
-        [DllImport(@"./engine")] private static extern void SetTextureEntity(IntPtr entity, string path);
-        [DllImport(@"./engine")] private static extern void RenderEntity(IntPtr entity);
-        [DllImport(@"./engine")] private static extern IntPtr DeleteEntity(IntPtr entity);
-
         public ushort Width
         {
             get
@@ -41,6 +22,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern ushort GetHeightEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetHeightEntity(IntPtr entity, ushort w);
         public ushort Height
         {
             get
@@ -54,6 +37,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern short GetXEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetXEntity(IntPtr entity, short x);
         public short X
         {
             get
@@ -67,6 +52,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern short GetYEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetYEntity(IntPtr entity, short y);
         public short Y
         {
             get
@@ -80,6 +67,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern ushort GetTileWEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetTileWEntity(IntPtr entity, ushort w);
         public ushort TileWidth
         {
             get
@@ -93,6 +82,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern ushort GetTileHEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetTileHEntity(IntPtr entity, ushort h);
         public ushort TileHeight
         {
             get
@@ -106,6 +97,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern short GetTileXEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetTileXEntity(IntPtr entity, short x);
         public short TileX
         {
             get
@@ -119,6 +112,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern short GetTileYEntity(IntPtr entity);
+        [DllImport(@"./engine")] private static extern void SetTileYEntity(IntPtr entity, short y);
         public short TileY
         {
             get
@@ -132,6 +127,7 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern void SetTextureEntity(IntPtr entity, string path);
         public string Texture
         {
             set
@@ -140,6 +136,7 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern IntPtr CreateEntity();
         public Entity()
         {
             _entity = CreateEntity();
@@ -203,11 +200,18 @@ namespace engn
             TileY = y;
         }
 
+        public virtual void Process()
+        {
+            // Do nothing
+        }
+
+        [DllImport(@"./engine")] private static extern void RenderEntity(IntPtr entity);
         public void Render()
         {
             RenderEntity(_entity);
         }
 
+        [DllImport(@"./engine")] private static extern IntPtr DeleteEntity(IntPtr entity);
         ~Entity()
         {
             DeleteEntity(_entity);
