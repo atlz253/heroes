@@ -8,12 +8,6 @@ namespace engn
         private readonly IntPtr _line;
 
         [DllImport(@"./engine")] private static extern IntPtr CreateLine(Point start, Point end);
-        [DllImport(@"./engine")] private static extern void SetStartLine(IntPtr line, Point start);
-        [DllImport(@"./engine")] private static extern void SetEndLine(IntPtr line, Point end);
-        [DllImport(@"./engine")] private static extern void SetColorLine(IntPtr line, Color color);
-        [DllImport(@"./engine")] private static extern void RenderLine(IntPtr line);
-        [DllImport(@"./engine")] private static extern void DeleteLine(IntPtr line);
-
         public Line(Point start, Point end)
         {
             _line = CreateLine(start, end);
@@ -39,26 +33,31 @@ namespace engn
             SetColor(new Color(color.Item1, color.Item2, color.Item3, color.Item4));
         }
 
+        [DllImport(@"./engine")] private static extern void SetStartLine(IntPtr line, Point start);
         public void SetStart(Point start)
         {
             SetStartLine(_line, start);
         }
 
+        [DllImport(@"./engine")] private static extern void SetEndLine(IntPtr line, Point end);
         public void SetEnd(Point end)
         {
             SetEndLine(_line, end);
         }
 
+        [DllImport(@"./engine")] private static extern void SetColorLine(IntPtr line, Color color);
         public void SetColor(Color color)
         {
             SetColorLine(_line, color);
         }
 
+        [DllImport(@"./engine")] private static extern void RenderLine(IntPtr line);
         public void Render()
         {
             RenderLine(_line);
         }
 
+        [DllImport(@"./engine")] private static extern void DeleteLine(IntPtr line);
         ~Line()
         {
             DeleteLine(_line);
@@ -69,20 +68,8 @@ namespace engn
     {
         IntPtr _rect;
 
-        [DllImport(@"./engine")] private static extern IntPtr CreateRectangle(Rect rect);
-        [DllImport(@"./engine")] private static extern void SetWRectangle(IntPtr rectangle, ushort w);
-        [DllImport(@"./engine")] private static extern void SetHRectangle(IntPtr rectangle, ushort h);
         [DllImport(@"./engine")] private static extern ushort GetWRectangle(IntPtr rectangle);
-        [DllImport(@"./engine")] private static extern ushort GetHRectangle(IntPtr rectangle);
-        [DllImport(@"./engine")] private static extern void SetXRectangle(IntPtr rectangle, short x);
-        [DllImport(@"./engine")] private static extern void SetYRectangle(IntPtr rectangle, short y);
-        [DllImport(@"./engine")] private static extern short GetXRectangle(IntPtr rectangle);
-        [DllImport(@"./engine")] private static extern short GetYRectangle(IntPtr rectangle);
-        [DllImport(@"./engine")] private static extern void SetColorRectangle(IntPtr rectangle, Color color);
-        [DllImport(@"./engine")] private static extern void RenderRectangle(IntPtr rectangle);
-        [DllImport(@"./engine")] private static extern void RenderFillRectangle(IntPtr rectangle);
-        [DllImport(@"./engine")] private static extern void DeleteRectangle(IntPtr rectangle);
-
+        [DllImport(@"./engine")] private static extern void SetWRectangle(IntPtr rectangle, ushort w);
         public ushort W
         {
             get
@@ -96,6 +83,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern ushort GetHRectangle(IntPtr rectangle);
+        [DllImport(@"./engine")] private static extern void SetHRectangle(IntPtr rectangle, ushort h);
         public ushort H
         {
             get
@@ -109,6 +98,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern short GetXRectangle(IntPtr rectangle);
+        [DllImport(@"./engine")] private static extern void SetXRectangle(IntPtr rectangle, short x);
         public short X
         {
             get
@@ -122,6 +113,8 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern short GetYRectangle(IntPtr rectangle);
+        [DllImport(@"./engine")] private static extern void SetYRectangle(IntPtr rectangle, short y);
         public short Y
         {
             get
@@ -135,6 +128,7 @@ namespace engn
             }
         }
 
+        [DllImport(@"./engine")] private static extern IntPtr CreateRectangle(Rect rect);
         public Rectangle(Rect rect)
         {
             _rect = CreateRectangle(rect);
@@ -149,21 +143,25 @@ namespace engn
 
         public Rectangle((ushort, ushort, short, short) rect, (int, int, int, int) color) : this(new Rect(rect), new Color(color)) { }
 
+        [DllImport(@"./engine")] private static extern void SetColorRectangle(IntPtr rectangle, Color color);
         public void SetColor(Color color)
         {
             SetColorRectangle(_rect, color);
         }
 
+        [DllImport(@"./engine")] private static extern void RenderRectangle(IntPtr rectangle);
         public void Render()
         {
             RenderRectangle(_rect);
         }
 
+        [DllImport(@"./engine")] private static extern void RenderFillRectangle(IntPtr rectangle);
         public void RenderFill()
         {
             RenderFillRectangle(_rect);
         }
 
+        [DllImport(@"./engine")] private static extern void DeleteRectangle(IntPtr rectangle);
         ~Rectangle()
         {
             DeleteRectangle(_rect);

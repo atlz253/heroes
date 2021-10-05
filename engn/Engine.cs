@@ -5,17 +5,13 @@ namespace engn
 {
     public static class Engine
     {
-        [DllImport(@"./engine")]
-        private static extern bool EngineInit(int w, int h);
-
-        [DllImport(@"./engine")]
-        private static extern bool EngineQuit();
-
+        [DllImport(@"./engine")] private static extern bool EngineInit(int w, int h);
         public static bool Init(int w = 1280, int h = 720)
         {
             return EngineInit(w, h);
         }
 
+        [DllImport(@"./engine")] private static extern bool EngineQuit();
         public static bool Quit()
         {
             return EngineQuit();
@@ -24,17 +20,13 @@ namespace engn
 
     public static class Render
     {
-        [DllImport(@"./engine")]
-        private static extern bool RenderClear();
-
-        [DllImport(@"./engine")]
-        private static extern void RenderPresent();
-
+        [DllImport(@"./engine")] private static extern bool RenderClear();
         public static bool Clear()
         {
             return RenderClear();
         }
 
+        [DllImport(@"./engine")] private static extern void RenderPresent();
         public static void Present()
         {
             RenderPresent();
