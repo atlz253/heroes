@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/heroes/bin/Debug/net5.0/heroes.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/heroes",
+            "cwd": "${workspaceFolder}/heroes/bin/Debug/net5.0",
             "console": "internalConsole",
             "stopAtEntry": false
         },

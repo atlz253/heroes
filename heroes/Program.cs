@@ -7,8 +7,8 @@ namespace heroes
     public static class Global
     {
         public static Random rnd = new Random();
-        public const int screenSize = 960, cellSize = 32;
-        public const string texture = "/home/fedor/Desktop/heroes/heroes/heroes/res/textures.png";
+        public const int screenSize = 800, cellSize = 32;
+        public const string texture = "./textures.png";
     }
 
     public sealed class World
