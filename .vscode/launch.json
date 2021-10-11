@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/heroes/bin/Debug/net5.0/heroes.dll",
+            "program": "${workspaceFolder}/heroes/heroes/bin/Debug/net5.0/heroes.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/heroes/bin/Debug/net5.0",
+            "cwd": "${workspaceFolder}/heroes/heroes/bin/Debug/net5.0",
             "console": "internalConsole",
             "stopAtEntry": false
         },
