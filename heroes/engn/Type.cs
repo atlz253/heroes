@@ -5,20 +5,19 @@ namespace engn
         public short x, y;
         public ushort w, h;
 
-        public Rect(ushort w, ushort h, short x = 0, short y = 0)
+        public Rect(int w, int h, int x = 0, int y = 0)
         {
-            this.w = w;
-            this.h = h;
-            this.x = x;
-            this.y = y;
+            this.w = (ushort) w;
+            this.h = (ushort) h;
+            this.x = (short) x;
+            this.y = (short) y;
         }
-
-        public Rect((ushort, ushort, short, short) rect)
-        {
-            this.w = rect.Item1;
-            this.h = rect.Item2;
-            this.x = rect.Item3;
-            this.y = rect.Item4;
+        public Rect((int, int, int, int) rect) 
+        { 
+            this.w = (ushort) rect.Item1;
+            this.h = (ushort) rect.Item2;
+            this.x = (short) rect.Item3;
+            this.y = (short) rect.Item4;
         }
     }
 
@@ -41,14 +40,6 @@ namespace engn
         public char b;
         public char a;
 
-        public Color(char r, char g, char b, char a)
-        {
-            this.r = r;
-            this.g = g;
-            this.b = b;
-            this.a = a;
-        }
-
         public Color(int r, int g, int b, int a) // FIXME: values check
         {
             this.r = (char)r;
@@ -56,15 +47,6 @@ namespace engn
             this.b = (char)b;
             this.a = (char)a;
         }
-
-        public Color((char, char, char, char) color)
-        {
-            this.r = color.Item1;
-            this.g = color.Item2;
-            this.b = color.Item3;
-            this.a = color.Item4;
-        }
-
         public Color((int, int, int, int) color) // FIXME: values check
         {
             this.r = (char)color.Item1;

@@ -134,14 +134,14 @@ namespace engn
             _rect = CreateRectangle(rect);
         }
 
-        public Rectangle((ushort, ushort, short, short) rect) : this(new Rect(rect)) { }
+        public Rectangle((int, int, int, int) rect) : this(new Rect(rect)) { }
 
         public Rectangle(Rect rect, Color color) : this(rect)
         {
             SetColor(color);
         }
 
-        public Rectangle((ushort, ushort, short, short) rect, (int, int, int, int) color) : this(new Rect(rect), new Color(color)) { }
+        public Rectangle((int, int, int, int) rect, (int, int, int, int) color) : this(new Rect(rect), new Color(color)) { }
 
         [DllImport(@"./engine")] private static extern void SetColorRectangle(IntPtr rectangle, Color color);
         public void SetColor(Color color)
