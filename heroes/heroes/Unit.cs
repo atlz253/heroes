@@ -2,7 +2,7 @@ using engn;
 
 namespace heroes
 {
-    public interface IAttack
+    public interface IAttack // TODO: использовать делегат
     {
         void Attack();
     }
